@@ -4,36 +4,51 @@
 //  scheme-mode 
 //  get-scheme-button
 //  image-container
-let seedColor = document.getElementById("seed-color");
-let schemeMode = document.getElementById("scheme-mode"); // (<select></select>)
-let getSchemeButton = document.getElementById("get-scheme-button");
-let colorForm = document.getElementById("color-form");
-let imageContainer = document.getElementById("image-container")
+const seedColor = document.getElementById("seed-color")
+const schemeMode = document.getElementById("scheme-mode")
+const colorForm = document.getElementById("color-form")
+const schemeContainer = document.getElementById("scheme-container")
 
 // Add Event listener to button
 colorForm.addEventListener("submit", e => {
         e.preventDefault();
-        const userScheme = schemeMode.value
-        console.log(userScheme);
+        const userColor = seedColor.value;
+        const userScheme = schemeMode.value;
+        // edit baseURL
+        let fetchURL = `https://www.thecolorapi.com/scheme?hex=${userColor.slice(1)}&mode=${userScheme}&count=6`
+
+        // fetch functionality to send GET request to Color API
+        fetch(fetchURL)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                    renderColorScheme(data.colors);
+            }
+                )
     })
 //Create a function to render colors
 // - this should fire after user clicks "Get Color Scheme"
-// - Program needs to take user input which will be the input.value -> schemeMode.value
 // - color API returns an image in the format of an SVG
-function renderColorScheme(){
+function renderColorScheme(colors){
+    // create empty HTML String
     let html = ""
-
-    
+    // loop through colors
+        // add HTML for this color
+        // use its hex value for the background
+        // use its hex value for the text
+        for(const color of colors){
+            html += `
+            <div class="color-column">
+                <div class="color-swatch" style="background-color: ${color.hex.value}"></div>
+                <p class="hex-code">${color.hex.clean}</p>
+            </div>
+`
+        }
+        console.log(html);
+    // put finished HTML into div
+        schemeContainer.innerHTML = html;
 }
 
-// fetch functionality to send GET request to Color API
-    fetch("https://www.thecolorapi.com/scheme?hex=0047AB&rgb=0,71,171&hsl=215,100%,34%&cmyk=100,58,0,33&format=json&mode=analogic&count=6")
-        .then(res => res.json())
-        .then(data => {
-                console.log(data.image)
-                imageContainer.innerHTML = `<img src="${data.image.bare}">`
-                console.log(imageContainer)
-        }
-            
-            )
+
+    
 
