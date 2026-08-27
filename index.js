@@ -40,7 +40,7 @@ function renderColorScheme(colors){
             html += `
             <div class="color-column">
                 <div class="color-swatch" style="background-color: ${color.hex.value}"></div>
-                <p class="hex-code">${color.hex.clean}</p>
+                <p class="hex-code">${color.hex.value}</p>
             </div>
 `
         }

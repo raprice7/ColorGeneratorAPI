@@ -48,6 +48,12 @@ table {
 }
 
 .color-swatch {
-    height: 300px;
-    border: 1px solid red;
+    height: 400px;
+}
+#scheme-container {
+    display: flex;
+}
+
+.color-column {
+    flex: 1;
 }
