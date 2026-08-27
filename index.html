@@ -4,7 +4,8 @@
         <title>Color Scheme Generator</title>
     </head>
     <body>
-        <form>
+        <!-- User Input form for selecting color scheme -->
+        <form id="color-form">
             <input id="seed-color" type="color">
 
             <select id="scheme-mode">
@@ -20,6 +21,8 @@
 
             <button id="get-scheme-btn">Get Color Scheme</button>
         </form>
+        <!-- Container for displaying color scheme -->
+        <div id="image-container"></div>
         <script src="index.js"></script>
     </body>
 </html>
