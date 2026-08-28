@@ -21,7 +21,6 @@ colorForm.addEventListener("submit", e => {
         fetch(fetchURL)
             .then(res => res.json())
             .then(data => {
-                console.log(data);
                     renderColorScheme(data.colors);
             }
                 )
@@ -44,11 +43,29 @@ function renderColorScheme(colors){
             </div>
 `
         }
-        console.log(html);
     // put finished HTML into div
         schemeContainer.innerHTML = html;
+        // create copy funcionality for hex codes
+        const hexCodes = document.querySelectorAll(".hex-code");
+        for(const hexCode of hexCodes){
+            hexCode.addEventListener("click", e=>{
+                navigator.clipboard.writeText(e.target.innerText);
+                alert(`${e.target.innerText} copied to clipboard!`)
+            })
+        }
 }
 
 
     
+// function copyText(e) {
+    
+//     let text =""
+//   navigator.clipboard.writeText(text)
+//     .then(() => {
+//       alert("Copied!");
+//     })
+//     .catch(err => {
+//       console.error("Failed to copy: ", err);
+//     });
+// }
 
